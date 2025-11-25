@@ -15,8 +15,7 @@
     "lint": "eslint",
     "lint:fix": "next lint --fix",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
-    "clean": "git clean -xdf node_modules",
-    "setup": "bash setup.sh"
+    "clean": "git clean -xdf node_modules"
   },
   "dependencies": {
     "next": "15.5.0",
