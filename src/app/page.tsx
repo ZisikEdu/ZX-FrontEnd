@@ -5,7 +5,7 @@ import { SidebarTrigger } from '@/components/ui/sidebar';
 
 export default function Home() {
   return (
-    <main className="bg-background p-8">
+    <main className="w-[1200px] m-auto h-dvh flex flex-col p-4  gap-4">
       <h1>Home</h1>
       <div className="flex flex-col gap-4 w-[180px] p-4">
         <Button variant="default">독후감 작성</Button>

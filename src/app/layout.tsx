@@ -1,9 +1,10 @@
+import RootSidebar from '@/components/RootSidebar';
 import { ThemeProvider } from '@/components/theme-provider';
+import { SidebarProvider } from '@/components/ui/sidebar';
 
 import type { Metadata } from 'next';
 
 import './globals.css';
-import { Sidebar, SidebarProvider } from '@/components/ui/sidebar';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -17,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" suppressHydrationWarning>
-      <body className="antialiased">
+      <body className="antialiased bg-background">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -25,7 +26,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <SidebarProvider defaultOpen={true}>
-            <Sidebar />
+            <RootSidebar />
             {children}
           </SidebarProvider>
         </ThemeProvider>
