@@ -1,6 +1,7 @@
 import BookMark from '@/components/BookMark';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         <Button variant="highlight">독후감 작성</Button>
       </div>
       <ThemeToggle />
+      <SidebarTrigger>X</SidebarTrigger>
       <BookMark />
     </main>
   );
