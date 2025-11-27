@@ -1,6 +1,6 @@
 'use client';
 
-import { BookOpen, Bot, ChevronRight, FileText, Home, Settings } from 'lucide-react';
+import { BookOpen, ChevronRight, FileText, Home, Settings } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
 import { cn } from '@/lib/utils';
@@ -29,8 +29,7 @@ const items = [
     url: '/library',
     icon: BookOpen,
   },
-  { title: '독후감', url: '/write', icon: FileText },
-  { title: '사서', url: '/assist', icon: Bot },
+  { title: '독후감', url: '/book/write', icon: FileText },
 ];
 
 export default function AppSidebar() {
