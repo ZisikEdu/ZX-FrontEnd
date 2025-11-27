@@ -1,4 +1,4 @@
-import RootSidebar from '@/components/RootSidebar';
+import AppSidebar from '@/components/AppSidebar';
 import { ThemeProvider } from '@/components/theme-provider';
 import { SidebarProvider } from '@/components/ui/sidebar';
 
@@ -26,7 +26,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <SidebarProvider defaultOpen={true}>
-            <RootSidebar />
+            <AppSidebar />
             {children}
           </SidebarProvider>
         </ThemeProvider>

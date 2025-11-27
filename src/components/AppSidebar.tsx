@@ -1,6 +1,7 @@
 'use client';
 
 import { BookOpen, Bot, ChevronRight, FileText, Home, Settings } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 import { cn } from '@/lib/utils';
 
@@ -19,8 +20,8 @@ import {
 
 const items = [
   {
-    title: '대시보드',
-    url: '/',
+    title: '홈',
+    url: '/home',
     icon: Home,
   },
   {
@@ -28,12 +29,13 @@ const items = [
     url: '/library',
     icon: BookOpen,
   },
-  { title: '독후감', url: '#', icon: FileText },
-  { title: '사서', url: '#', icon: Bot },
+  { title: '독후감', url: '/write', icon: FileText },
+  { title: '사서', url: '/assist', icon: Bot },
 ];
 
-export default function RootSidebar() {
+export default function AppSidebar() {
   const { open, toggleSidebar } = useSidebar();
+  const path = usePathname();
 
   return (
     <Sidebar collapsible="icon">
@@ -49,7 +51,7 @@ export default function RootSidebar() {
         <SidebarMenu>
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton asChild>
+              <SidebarMenuButton asChild isActive={path.includes(item.url)}>
                 <a href={item.url}>
                   <item.icon />
                   <span>{item.title}</span>
