@@ -1,6 +1,4 @@
-import AppSidebar from '@/components/AppSidebar';
 import { ThemeProvider } from '@/components/theme-provider';
-import { SidebarProvider } from '@/components/ui/sidebar';
 
 import type { Metadata } from 'next';
 
@@ -25,10 +23,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SidebarProvider defaultOpen={true}>
-            <AppSidebar />
-            {children}
-          </SidebarProvider>
+          {children}
         </ThemeProvider>
       </body>
     </html>

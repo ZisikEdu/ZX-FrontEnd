@@ -1,5 +1,5 @@
 import BookMark from '@/components/BookMark';
-import SearchField from '@/components/Search';
+import SearchField from '@/components/SearchField';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
 
