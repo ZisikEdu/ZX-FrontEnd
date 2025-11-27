@@ -1,7 +1,7 @@
 import BookMark from '@/components/BookMark';
+import SearchField from '@/components/Search';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
-import { SidebarTrigger } from '@/components/ui/sidebar';
 
 export default function Home() {
   return (
@@ -13,8 +13,10 @@ export default function Home() {
         <Button variant="ghost">독후감 작성</Button>
         <Button variant="highlight">독후감 작성</Button>
       </div>
+      <div className="w-full flex justify-end">
+        <SearchField />
+      </div>
       <ThemeToggle />
-      <SidebarTrigger>X</SidebarTrigger>
       <BookMark />
     </main>
   );
