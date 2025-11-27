@@ -24,7 +24,7 @@ export default function BookMark() {
     <Card className="w-[320px]">
       <CardHeader>
         <CardDescription className="flex items-center gap-2">
-          <BookmarkIcon className="w-[14px]" />
+          <BookmarkIcon size={14} />
           <span>책갈피</span>
         </CardDescription>
       </CardHeader>
