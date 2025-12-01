@@ -9,6 +9,7 @@ export type BookType = {
   rating: number;
   status: string;
   currentReaders: number;
+  isbn?: string;
   cover: string;
 };
 
@@ -22,8 +23,9 @@ const books: BookType[] = [
     rating: 5,
     status: 'reading',
     currentReaders: 247,
+    isbn: '9788934972464',
     cover:
-      'https://i.namu.wiki/i/7AilEdOqy_qM-ggh8jmsspf5FRPnSU0wxpJIdRXk5vKMVpt3feIv6qXksLjUWJ5ZWrUE6KGiZmxghO1d_KOf2PuYHwgMy5sW_JkjmDmZdxu0hVc5229GvPEHi334SB8BT9wbagY2jj5rj3OAhOLvSg.webp',
+      'https://shopping-phinf.pstatic.net/main_3248237/32482377706.20230926085206.jpg?type=w300',
   },
   {
     id: 2,

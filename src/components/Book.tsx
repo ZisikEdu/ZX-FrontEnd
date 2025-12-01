@@ -1,3 +1,5 @@
+'use client';
+
 import { Star, Users } from 'lucide-react';
 
 import { BookType } from './BookContainer';
@@ -10,10 +12,14 @@ interface Props {
 }
 
 export default function Book({ book }: Props) {
-  const { id, title, author, genre, progress, rating, status, currentReaders, cover } = book;
+  const { title, author, genre, progress, cover, isbn } = book;
+
+  const handleSearch = async () => {
+    if (!isbn) return;
+  };
 
   return (
-    <div className="group/card aspect-[2/3] overflow-hidden relative">
+    <div className="group/card aspect-[2/3] overflow-hidden relative" onClick={handleSearch}>
       <ImageWithFallback
         src={cover}
         alt={title}
