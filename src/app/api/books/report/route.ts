@@ -1,7 +1,29 @@
 import clientPromise from '@/lib/mongodb';
+import { NextResponse } from 'next/server';
+
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const query = searchParams.get('query');
+
+  if (!query) {
+    return NextResponse.json({ error: '검색어가 없습니다.' }, { status: 400 });
+  }
+
+  const client = await clientPromise;
+  const db = client.db('zx_test');
+
+  const result = await db.collection('record').find({ isbn: query }).toArray();
+
+  return NextResponse.json(result);
+}
 
 export async function POST(request: Request) {
   //TODO - 유저 검증 로직
+  /**
+   * TODO
+   * 이미 존재하는 독후감일 경우
+   * create가 아니라 update 하기
+   */
   const res = await request.json();
   const { isbn, content } = res;
 

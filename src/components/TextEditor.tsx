@@ -34,7 +34,7 @@ import { Button } from './ui/button';
 import { useParams } from 'next/navigation';
 
 interface Props {
-  content?: string;
+  content?: object;
 }
 
 const styleActive = 'font-bold text-brand';
