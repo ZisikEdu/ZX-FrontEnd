@@ -1,12 +1,16 @@
 import BookMark from '@/components/BookMark';
-import BookShelf from '@/components/BookShelf';
+import ProfileCard from './_components/ProfileCard';
+import PageContainer from '@/components/PageContainer';
 
 export default function HomePage() {
   return (
-    <main className="m-auto flex h-dvh w-[920px] flex-col gap-4 p-4">
-      <h1>Home</h1>
-      <BookShelf />
-      <BookMark />
-    </main>
+    <PageContainer as="main">
+      <div className="flex gap-4">
+        <div className="grow">
+          <ProfileCard />
+        </div>
+        <BookMark />
+      </div>
+    </PageContainer>
   );
 }
