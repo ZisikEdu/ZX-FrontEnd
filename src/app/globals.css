@@ -126,3 +126,26 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  /* 크롬, 사파리, 오페라, 엣지 */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 파이어폭스, IE, 구형 엣지 */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* 파이어폭스, IE, 구형 엣지 */
+html {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

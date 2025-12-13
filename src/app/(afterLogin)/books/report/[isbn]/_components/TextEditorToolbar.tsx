@@ -38,7 +38,7 @@ export default function TextEditorToolbar({ editor }: Props) {
 
   return (
     <>
-      <div className="toolbar border-primary flex items-center gap-4 border">
+      <div className="toolbar fixed top-0 right-0 left-0 z-10 flex items-center gap-4 border-b border-zinc-800 bg-zinc-950 px-4 py-2">
         <Button
           size="icon"
           variant="ghost"
