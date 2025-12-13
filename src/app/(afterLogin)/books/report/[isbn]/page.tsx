@@ -1,48 +1,103 @@
-import TextEditor from '@/components/TextEditor';
+'use client';
+
+import { Save } from 'lucide-react';
+
+import Toolbar from '@/app/(afterLogin)/books/report/[isbn]/_components/TextEditorToolbar';
+import PageContainer from '@/components/PageContainer';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
 
-// 서버 컴포넌트이므로 async/await 사용 가능
-export default async function BookReportPage({
-  params,
-}: {
-  params: Promise<{ isbn: string }>;
-}) {
-  const { isbn } = await params; // Next.js 15 방식
+import TextEditorContent from './_components/TextEditorContent';
+import useTextEditor from './_components/useTextEditor';
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-  // 1. 서버에서 직접 데이터 가져오기 (API 호출 or DB 직접 연결)
-  // (같은 서버 내라면 fetch보다는 DB 직접 호출을 권장하지만, 일단 fetch 예시 유지)
-  let data = null;
-  try {
-    // 주의: 서버 컴포넌트에서 내부 API 호출 시 전체 URL 필요 (http://localhost:3000...)
-    // 혹은 DB 호출 함수를 직접 import해서 쓰세요 (추천).
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/books/report?query=${isbn}`,
-      {
-        cache: 'no-store',
-      },
-    );
-    if (res.ok) {
-      data = await res.json();
-      console.log(data);
+import { Content } from '@tiptap/react';
+
+export default function BookReportPage() {
+  const { isbn } = useParams();
+  const [data, setData] = useState<Content>(null);
+  const { editor } = useTextEditor({ content: data });
+  const [isLoading, setIsLoading] = useState(true);
+
+  const saveRecord = async () => {
+    if (!editor) return;
+    const content = editor.getJSON();
+    console.log(content);
+    const url = '/api/books/report';
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          isbn,
+          content,
+        }),
+      });
+      const result = await response.json();
+      console.log(result);
+      //TODO - response success toast
+    } catch (error) {
+      console.error(error);
     }
-  } catch (error) {
-    console.error(error);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!isbn) return;
+      console.log('fetching data for isbn:', isbn);
+      try {
+        setIsLoading(true);
+        const response = await fetch(`/api/books/report?query=${isbn}`, {
+          cache: 'no-store',
+        });
+        if (!response.ok) throw new Error('Network response was not ok');
+        const res = await response.json();
+        setData(res[res.length - 1]?.content);
+        console.log('fetched data:', res);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, [isbn]);
+
+  useEffect(() => {
+    console.log('Page component data updated:', data);
+  }, [data]);
+
+  if (isLoading) {
+    return (
+      <PageContainer className="flex h-dvh items-center justify-center">
+        <span>Loading...</span>
+      </PageContainer>
+    );
   }
 
-  if (!data) return <div>데이터를 찾을 수 없습니다.</div>;
-
-  //TOTO - 임시 저장 기능 구현
+  //TODO - 임시 저장 기능 구현
   return (
-    <div className="h-dvh w-full p-6">
-      <Button variant="ghost" asChild>
-        <Link href={`/books/${isbn}`} className="flex items-center gap-2">
-          <ArrowLeft size={16} />
-          <span>나가기</span>
-        </Link>
-      </Button>
-      <TextEditor content={data[data.length - 1]?.content || ''} />
-    </div>
+    <PageContainer className="h-dvh">
+      <div className="bg-black">
+        {editor && (
+          <>
+            <Toolbar editor={editor} />
+            <TextEditorContent editor={editor} />
+          </>
+        )}
+        <div className="bg-primary-foreground fixed right-0 bottom-0 left-0 flex p-2">
+          <Button
+            onClick={saveRecord}
+            className="flex items-center justify-center gap-1"
+          >
+            <Save />
+            <span>저장하기</span>
+          </Button>
+        </div>
+      </div>
+    </PageContainer>
   );
 }

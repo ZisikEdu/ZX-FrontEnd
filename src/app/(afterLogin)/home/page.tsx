@@ -1,6 +1,7 @@
 import BookMark from '@/components/BookMark';
-import ProfileCard from './_components/ProfileCard';
 import PageContainer from '@/components/PageContainer';
+
+import ProfileCard from './_components/ProfileCard';
 
 export default function HomePage() {
   return (

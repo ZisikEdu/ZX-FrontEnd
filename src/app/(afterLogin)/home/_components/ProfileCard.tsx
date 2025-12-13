@@ -1,7 +1,10 @@
-import { ImageWithFallback } from '@/components/ImageWithFallback';
-import profileImage from '@/../public/default-profile.png';
-import { cn } from '@/lib/utils';
 import Image from 'next/image';
+
+import profileImage from '@/../public/default-profile.png';
+
+import { ImageWithFallback } from '@/components/ImageWithFallback';
+import { cn } from '@/lib/utils';
+
 
 const data = {
   userName: '독서가',

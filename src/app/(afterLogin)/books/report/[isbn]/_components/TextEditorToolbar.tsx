@@ -1,19 +1,6 @@
 'use client';
 
-import Blockquote from '@tiptap/extension-blockquote';
-import Bold from '@tiptap/extension-bold';
-import Document from '@tiptap/extension-document';
-import Heading from '@tiptap/extension-heading';
-import HorizontalRule from '@tiptap/extension-horizontal-rule';
-import Image from '@tiptap/extension-image';
-import Italic from '@tiptap/extension-italic';
-import { BulletList, ListItem, OrderedList } from '@tiptap/extension-list';
-import Paragraph from '@tiptap/extension-paragraph';
-import Strike from '@tiptap/extension-strike';
-import Text from '@tiptap/extension-text';
-import Underline from '@tiptap/extension-underline';
-import { Dropcursor, Gapcursor, Placeholder } from '@tiptap/extensions';
-import { useEditor, EditorContent } from '@tiptap/react';
+import { Editor } from '@tiptap/react';
 import {
   BoldIcon,
   Heading1,
@@ -28,62 +15,17 @@ import {
   Strikethrough,
   UnderlineIcon,
 } from 'lucide-react';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 
-import { Button } from './ui/button';
-import { useParams } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 
 interface Props {
-  content?: object;
+  editor: Editor | null;
 }
 
 const styleActive = 'font-bold text-brand';
 
-export default function TextEditor({ content }: Props) {
-  const { isbn } = useParams<{ isbn: string }>();
-  const [_, forceUpdate] = useState(false);
-  const editor = useEditor({
-    content,
-    /** NOTE
-     * Don't render immediately on the server
-     * to avoid SSR issues
-     */
-    immediatelyRender: false,
-    extensions: [
-      Document,
-      Text,
-      Paragraph,
-      Heading.configure({ levels: [1, 2, 3] }),
-      Blockquote,
-      BulletList,
-      OrderedList,
-      ListItem,
-      HorizontalRule,
-      Image,
-      Dropcursor,
-      Gapcursor,
-      Bold,
-      Italic,
-      Strike,
-      Underline,
-      Placeholder.configure({
-        placeholder: 'Write something …',
-      }),
-    ],
-    onTransaction: () => {
-      forceUpdate((prev) => !prev);
-    },
-    // onSelectionUpdate: () => {
-    //   forceUpdate((prev) => !prev);
-    // },
-    editorProps: {
-      attributes: {
-        class:
-          'prose prose-gray lg:prose-xl dark:prose-invert border-primary min-h-[300px] max-w-none border border-t-0 p-4 focus:outline-none focus-visible:outline-none',
-      },
-    },
-  });
-
+export default function TextEditorToolbar({ editor }: Props) {
   const addImage = useCallback(() => {
     const url = window.prompt('URL');
 
@@ -92,34 +34,10 @@ export default function TextEditor({ content }: Props) {
     }
   }, [editor]);
 
-  const saveRecord = async () => {
-    if (!editor) return;
-    const content = editor.getJSON();
-    console.log(content);
-    const url = '/api/books/report';
-
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          isbn,
-          content,
-        }),
-      });
-      const result = await response.json();
-      console.log(result);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   if (!editor) return null;
 
   return (
-    <div className="mx-auto flex h-full w-[920px] flex-col">
+    <>
       <div className="toolbar border-primary flex items-center gap-4 border">
         <Button
           size="icon"
@@ -224,10 +142,6 @@ export default function TextEditor({ content }: Props) {
           <ImageIcon />
         </Button>
       </div>
-      <EditorContent editor={editor} />
-      <div className="flex justify-end">
-        <Button onClick={saveRecord}>저장</Button>
-      </div>
-    </div>
+    </>
   );
 }
