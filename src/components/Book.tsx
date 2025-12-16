@@ -3,7 +3,7 @@
 import { Users } from 'lucide-react';
 import Link from 'next/link';
 
-import { BookType } from '@/mock/user';
+import { BookType } from '@/mocks/user';
 
 import { ImageWithFallback } from './ImageWithFallback';
 import ProgressCard from './ProgressCard';

@@ -1,4 +1,4 @@
-import { userData } from '@/mock/user';
+import { userData } from '@/mocks/user';
 
 import Book from './Book';
 
