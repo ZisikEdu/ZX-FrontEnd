@@ -1,7 +1,7 @@
-import { Users } from 'lucide-react';
 import Link from 'next/link';
 
 import { ImageWithFallback } from '@/components/ImageWithFallback';
+import StarScore from '@/components/StarScore';
 import {
   Card,
   CardContent,
@@ -10,7 +10,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import StarScore from '@/components/StarScore';
 import { BookSearchResponse } from '@/mocks/mockBookList';
 
 interface BookProps {

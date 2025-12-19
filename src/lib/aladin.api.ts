@@ -55,16 +55,16 @@ const fetchBookDetail = async (
   }
 };
 
+const BOOK_LIST_QUERY_KEY = ['books', 'recommendeds'];
+
 async function fetchBookListProxy() {
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/open/book/aladin/list`;
   const response = await fetch(url, {
     method: 'GET',
     next: {
-      tags: ['books', 'recommended'],
-      //NOTE - use only fotce-cache
-      revalidate: 3600,
+      tags: BOOK_LIST_QUERY_KEY,
     },
-    cache: 'force-cache',
+    cache: 'no-store',
   });
 
   if (!response.ok) {
@@ -74,4 +74,9 @@ async function fetchBookListProxy() {
   return (await response.json()) as BookListResponse;
 }
 
-export { fetchBookDetailProxy, fetchBookDetail, fetchBookListProxy };
+export {
+  fetchBookDetailProxy,
+  fetchBookDetail,
+  fetchBookListProxy,
+  BOOK_LIST_QUERY_KEY,
+};

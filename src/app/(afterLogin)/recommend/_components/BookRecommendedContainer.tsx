@@ -1,13 +1,17 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
+
+import { BOOK_LIST_QUERY_KEY, fetchBookListProxy } from '@/lib/aladin.api';
+
 import BookRecommended from './BookRecommended';
-import { fetchBookListProxy } from '@/lib/aladin.api';
 
 export default function BookRecommendedContainer() {
   const { data } = useQuery({
-    queryKey: ['books', 'recommended'],
+    queryKey: BOOK_LIST_QUERY_KEY,
     queryFn: fetchBookListProxy,
+    staleTime: 60 * 1000,
+    gcTime: 5 * 60 * 1000,
   });
 
   if (!data) return null;

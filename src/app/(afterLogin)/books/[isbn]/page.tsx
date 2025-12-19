@@ -7,8 +7,8 @@ import { ImageWithFallback } from '@/components/ImageWithFallback';
 import StarScore from '@/components/StarScore';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { BookLookUpResponse } from '@/types/aladin.type';
 import { fetchBookDetail } from '@/lib/aladin.api';
+import { BookLookUpResponse } from '@/types/aladin.type';
 
 interface Props {
   params: Promise<{ isbn: string }>;
