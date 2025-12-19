@@ -63,12 +63,12 @@ export default function BookShelf() {
               >
                 <div
                   className={
-                    'absolute top-3 right-[3px] left-[3px] h-[2px] bg-white/10'
+                    'absolute top-3 right-[3px] left-[3px] h-0.5 bg-white/10'
                   }
                 ></div>
                 <div
                   className={
-                    'absolute right-[3px] bottom-6 left-[3px] h-[6px] bg-black/20'
+                    'absolute right-[3px] bottom-6 left-[3px] h-1.5 bg-black/20'
                   }
                 ></div>
 

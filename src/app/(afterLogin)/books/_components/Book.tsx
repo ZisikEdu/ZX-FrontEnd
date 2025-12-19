@@ -4,10 +4,7 @@ import { Users } from 'lucide-react';
 import Link from 'next/link';
 
 import { BookType } from '@/mocks/user';
-
-import { ImageWithFallback } from './ImageWithFallback';
-import ProgressCard from './ProgressCard';
-import StarScore from './StarScore';
+import { ImageWithFallback } from '@/components/ImageWithFallback';
 import {
   Card,
   CardContent,
@@ -15,7 +12,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from './ui/card';
+} from '@/components/ui/card';
+import ProgressCard from '@/components/ProgressCard';
+import StarScore from '@/components/StarScore';
 
 interface Props {
   book: BookType;

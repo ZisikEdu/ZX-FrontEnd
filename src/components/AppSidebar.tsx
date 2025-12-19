@@ -36,7 +36,7 @@ const items = [
   },
   {
     title: '서재',
-    url: '/library',
+    url: '/books',
     icon: BookOpen,
   },
   { title: '추천', url: '/recommend', icon: ThumbsUp },
