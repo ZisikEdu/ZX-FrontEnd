@@ -1,4 +1,4 @@
-import BookContainer from '@/components/BookContainer';
+import BookContainer from './_components/BookContainer';
 
 export default function LibraryPage() {
   return (
