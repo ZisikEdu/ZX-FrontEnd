@@ -3,18 +3,20 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import { ArrowUpRight, AtSignIcon, Calendar } from 'lucide-react';
 
 import { auth } from '@/auth';
-import { ImageWithFallback } from '@/components/ImageWithFallback';
 import { Button } from '@/components/ui/button';
+import DefaultProfile from '@/../public/default-profile.png';
 
 import 'dayjs/locale/ko';
+import Image from 'next/image';
 
 dayjs.locale('ko');
 dayjs.extend(relativeTime);
 
 export default async function ProfileCard() {
   const session = await auth();
+  const user = session?.user;
 
-  //TODO - session suspense
+  const profileImageSrc = user?.image || DefaultProfile.src;
 
   return (
     <div className="bg-background-primary border-border-primary flex flex-col gap-2 rounded-xs border p-6">
@@ -23,6 +25,7 @@ export default async function ProfileCard() {
         <span className="text-text-neutral-secondary text-xs leading-none">
           프로필
         </span>
+        {/* TODO - implement Function */}
         <Button
           className="dark:hover:bg-background-primary-hover stroke-icon-neutral-primary rounded-xl"
           variant="ghost"
@@ -35,20 +38,25 @@ export default async function ProfileCard() {
 
       {/* SECTION - content */}
       <div className="flex items-center gap-4">
-        <div className="relative size-25.5 overflow-hidden rounded-sm">
-          <ImageWithFallback
-            className="size-full object-cover"
-            src={session?.user?.image || ''}
-            alt={session?.user?.name || 'user profile cover'}
+        <div className="relative size-25.5 overflow-hidden rounded-sm bg-gray-100 dark:bg-gray-800">
+          <Image
+            fill
+            className="object-cover"
+            src={profileImageSrc}
+            alt={`${user?.name || 'User'} Profile Image`}
+            placeholder="blur"
+            blurDataURL={DefaultProfile.blurDataURL || DefaultProfile.src}
+            sizes="102px"
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-2">
             <div className="text-text-neutral-primary text-xl leading-none font-semibold">
-              {session?.user?.name || ''}
+              {user?.name || '-'}
             </div>
             <div className="text-text-neutral-tertiary text-sm leading-none font-light">
-              {session?.user?.email || ''}
+              {/* TODO - user description */}
+              {'한 줄 소개 곧 추가 예정입니다'}
             </div>
           </div>
           <div>
@@ -58,7 +66,7 @@ export default async function ProfileCard() {
                 이메일
               </span>
               <span className="text-text-neutral-tertiary text-xs leading-none">
-                {session?.user?.email || ''}
+                {user?.email || '-'}
               </span>
             </div>
             <div className="flex items-center gap-1 p-1">
@@ -67,7 +75,9 @@ export default async function ProfileCard() {
                 가입일
               </span>
               <span className="text-text-neutral-tertiary text-xs leading-none">
-                {dayjs(session?.user?.createdAt).format('YYYY년 MM월 DD일')}
+                {user?.createdAt
+                  ? dayjs(user?.createdAt).format('YYYY년 MM월 DD일')
+                  : '-'}
               </span>
             </div>
           </div>
