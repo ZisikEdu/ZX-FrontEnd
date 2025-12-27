@@ -1,11 +1,11 @@
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import { ArrowUpRight, AtSignIcon, Calendar } from 'lucide-react';
+
 import { auth } from '@/auth';
 import { ImageWithFallback } from '@/components/ImageWithFallback';
 import { Button } from '@/components/ui/button';
-import { ArrowUpRight, AtSignIcon, Calendar } from 'lucide-react';
-import ProfileImage from '@/../public/default-profile.png';
 
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ko';
 
 dayjs.locale('ko');
@@ -38,8 +38,7 @@ export default async function ProfileCard() {
         <div className="relative size-25.5 overflow-hidden rounded-sm">
           <ImageWithFallback
             className="size-full object-cover"
-            // src={session?.user?.image || ''}
-            src={ProfileImage.src}
+            src={session?.user?.image || ''}
             alt={session?.user?.name || 'user profile cover'}
           />
         </div>

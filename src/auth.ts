@@ -1,10 +1,10 @@
 import { MongoDBAdapter } from '@auth/mongodb-adapter';
+import { ObjectId } from 'mongodb';
 import NextAuth from 'next-auth';
 import Google from 'next-auth/providers/google';
 
 import { authConfig } from './auth.config';
 import { clientPromise, getCollection } from './lib/mongodb';
-import { ObjectId } from 'mongodb';
 
 /**
  * Google only provides Refresh Token
