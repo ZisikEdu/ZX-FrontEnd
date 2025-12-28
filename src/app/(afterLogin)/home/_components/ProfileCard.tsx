@@ -19,7 +19,7 @@ export default async function ProfileCard() {
   const profileImageSrc = user?.image || DefaultProfile.src;
 
   return (
-    <div className="bg-background-primary border-border-primary flex flex-col gap-2 rounded-xs border p-6">
+    <div className="bg-background-secondary border-border-primary flex flex-col gap-2 rounded-xs border p-6">
       {/* SECTION - header */}
       <div className="flex items-center justify-between">
         <span className="text-text-neutral-secondary text-xs leading-none">
